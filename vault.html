@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Love Vault - Our Memories</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --pink-soft: #ffe6e9;
+            --pink-medium: #ff8fab;
+            --pink-dark: #d63384;
+            --text-color: #5c4b51;
+        }
+
+        body {
+            margin: 0; padding: 0; background: linear-gradient(135deg, var(--pink-soft) 0%, #ebedee 100%);
+            font-family: 'Nunito', sans-serif; color: var(--text-color);
+        }
+
+        .header-section {
+            padding: 60px 20px 30px; text-align: center; background: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 { font-family: 'Dancing Script', cursive; font-size: 4.5rem; color: var(--pink-dark); margin: 0; }
+        
+        /* --- PHOTO GRID AESTHETICS --- */
+        .gallery-container { max-width: 1200px; margin: 40px auto; padding: 20px; }
+        .photo-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-auto-rows: 250px; gap: 15px;
+        }
+        .photo-item {
+            overflow: hidden; border-radius: 15px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        .photo-item:hover { transform: scale(1.03); box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3); }
+        .photo-item img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease; }
+        .photo-item:nth-child(4n) { grid-row: span 2; } 
+        .photo-item:nth-child(3n+1) { grid-column: span 1; }
+
+        /* --- FLOATING HEART, HOME BUTTON --- */
+        .heart-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; overflow: hidden; }
+        .heart { position: absolute; bottom: -100px; width: 20px; height: 20px; background-color: var(--pink-medium); transform: rotate(45deg); opacity: 0.5; animation: floatUp 10s linear infinite; }
+        .heart::before, .heart::after { content: ""; position: absolute; width: 20px; height: 20px; background-color: var(--pink-medium); border-radius: 50%; }
+        .heart::before { top: -10px; left: 0; }
+        .heart::after { left: -10px; top: 0; }
+        @keyframes floatUp { 0% { transform: translateY(0) rotate(45deg) scale(0.5); opacity: 0; } 50% { opacity: 0.8; } 100% { transform: translateY(-120vh) rotate(45deg) scale(1); opacity: 0; } }
+        .home-button {
+            display: inline-block; margin-top: 30px; padding: 10px 25px; background-color: var(--pink-dark); 
+            color: white; text-decoration: none; border-radius: 50px; font-weight: 700; transition: background 0.3s ease;
+        }
+        .home-button:hover { background-color: var(--pink-medium); }
+
+        /* === MOBILE RESPONSIVENESS === */
+        @media screen and (max-width: 600px) {
+            h1 { font-size: 3rem; }
+            .photo-grid { grid-template-columns: 1fr; grid-auto-rows: 300px; gap: 10px; }
+            .photo-item:nth-child(4n), .photo-item:nth-child(3n+1) { grid-column: auto; grid-row: auto; }
+            .header-section { padding: 40px 10px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="heart-bg" id="heart-bg"></div>
+
+    <div class="header-section">
+        <a href="index.html" class="home-button">🏠 Back to Apology Page</a>
+        <h1>Our Digital Scrapbook</h1>
+        <p>Every picture tells a piece of our story, Kaju Katli.</p>
+    </div>
+
+    <div class="gallery-container">
+        <div class="photo-grid">
+            <div class="photo-item"><img src="photo3.jpg" alt="Memory 1"></div>
+            <div class="photo-item"><img src="photo4.jpg" alt="Memory 2"></div>
+            <div class="photo-item"><img src="photo5.jpg" alt="Memory 3"></div>
+            <div class="photo-item"><img src="photo6.jpg" alt="Memory 4"></div>
+            <div class="photo-item"><img src="photo7.jpg" alt="Memory 5"></div>
+            <div class="photo-item"><img src="photo8.jpg" alt="Memory 6"></div>
+            <div class="photo-item"><img src="photo9.jpg" alt="Memory 7"></div>
+            <div class="photo-item"><img src="photo10.jpg" alt="Memory 8"></div>
+            <div class="photo-item"><img src="photo11.jpg" alt="Memory 9"></div>
+        </div>
+    </div>
+    
+    <a href="index.html" class="home-button" style="margin-bottom: 50px;">🏠 Back to Apology Page</a>
+
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 2 + 3 + "s"; 
+            document.getElementById('heart-bg').appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 5000);
+        }
+        setInterval(createHeart, 300);
+    </script>
+</body>
+</html>
